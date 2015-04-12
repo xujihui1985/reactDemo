@@ -120,6 +120,7 @@ app.components = app.components || {};
                         updateVal={this.props.updateVal} //this here by default refer to the element, so we need to bind this to this element
                         updateStatus={this.props.updateStatus} //this here by default refer to the element, so we need to bind this to this element
                         deleteTodo={this.props.deleteTodo}
+                        dangerous="<strong>HELLO</strong>"
                     />
                 );
              }.bind(this))}
@@ -144,9 +145,14 @@ app.components = app.components || {};
          if(this.props.todo.completed) {
             inputClassName += " finished";
          }
+
+         //to unescaping the content use dangerouslySetInnerHTML with double {{}}
          return (
              <div className="input-group input-group-lg">
-                 <span className="input-group-addon">
+                 <p dangerouslySetInnerHTML={{__html: this.props.dangerous}}></p>
+                 <span
+                     style={{backgroundColor: 'red'}}
+                     className="input-group-addon">
                     <input
                         checked={this.props.todo.completed}
                         type="checkbox"
